@@ -92,7 +92,7 @@ def write_log(log_path, message):
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(message + "\n")
 
-# ---------------- CLIPBOARD ----------------
+# ---------------- PASTE CLIPBOARD ----------------
 def paste(event=None):
     try:
         text_box.insert(tk.INSERT, root.clipboard_get())
@@ -385,6 +385,8 @@ label.grid(row=0, column=0, sticky="ew")
 
 text_box = tk.Text(root, height=8)
 text_box.grid(row=2, column=0, sticky="nsew", padx=10)
+text_box.bind("<Button-3>", show_context_menu)   # Linux / Windows
+text_box.bind("<Button-2>", show_context_menu)   # macOS / something Linux
 
 btn_folder = tk.Button(root, command=select_folder)
 btn_folder.grid(row=3, column=0, pady=5)
@@ -410,6 +412,7 @@ def update_ui():
     lang_btn.config(image=en_img if current_lang == "ru" else ru_img)
     blur_label.config(text=tr("blur"))
     dark_label.config(text=tr("darkness"))
+    text_box.config(undo=True)
 
     footer_label.config(
     text=tr("footer").format(
