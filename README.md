@@ -43,3 +43,15 @@
 ```bash
 pip install -r requirements.txt
 python main.py
+
+---
+
+### УСТАНОВКА
+
+pyinstaller --onefile --windowed 
+    --hidden-import=cv2 
+    --hidden-import=numpy 
+    --add-data "icon.png:." 
+    --add-data "russia-flag-icon.png:." 
+    --add-data "united-kingdom-flag-icon.png:." 
+main.py
